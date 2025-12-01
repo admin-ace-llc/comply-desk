@@ -1,1 +1,14 @@
+{
+  "name": "comply-desk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Comply-Desk — AI compliance kits for small businesses.",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo \"No build step required\""
+  },
+  "dependencies": {
+    "docx": "^9.0.0"
+  }
+}
 
