@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generate Your Compliance Kit — Comply-Desk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Generate your AI-powered compliance kit after purchase on Comply-Desk. Answer a short questionnaire and download a Word document you can edit." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="body-alt">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo-mark">CD</div>
+        <div class="logo-text">
+          <div class="logo-main">Comply-Desk</div>
+          <div class="logo-sub">AI Compliance Kits</div>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html#kits">Back to kits</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container narrow">
+        <div class="section-header">
+          <h1 id="gen-title">Generate your compliance kit</h1>
+          <p id="gen-subtitle">If you haven't purchased yet, please return to the main site and use your Stripe checkout link before generating content.</p>
+        </div>
+
+        <!-- FORM -->
+        <form id="questionnaire" class="card">
+          <div class="field">
+            <label for="business-name">Business name</label>
+            <input id="business-name" name="businessName" type="text" placeholder="e.g. Brightside Coffee LLC" required />
+          </div>
+
+          <div class="field">
+            <label for="industry">Industry / business type</label>
+            <input id="industry" name="industry" type="text" placeholder="e.g. cafe, marketing agency, small manufacturer" required />
+          </div>
+
+          <div class="field">
+            <label for="state">State (US)</label>
+            <input id="state" name="state" type="text" placeholder="e.g. Washington" required />
+          </div>
+
+          <div class="field">
+            <label for="employees">Approximate number of workers (employees + contractors)</label>
+            <input id="employees" name="employees" type="number" min="1" step="1" placeholder="e.g. 12" required />
+          </div>
+
+          <div class="field">
+            <label for="risks">Any special risks, equipment, or concerns? (optional)</label>
+            <textarea id="risks" name="risks" rows="3" placeholder="e.g. kitchen equipment, ladders, delivery drivers, sensitive customer data."></textarea>
+          </div>
+
+          <button type="submit" class="btn primary full-width" id="gen-submit">
+            Generate my kit outline & Word file
+          </button>
+
+          <p class="disclaimer">
+            This tool generates structured content and a Word document (.docx) for editing. Not legal advice or guaranteed compliance. Always review and tailor for your workplace.
+          </p>
+        </form>
+
+        <!-- RESULTS -->
+        <div id="results" class="result-card hidden">
+          <h2>Your structured kit outline</h2>
+          <div id="results-body"></div>
+
+          <button id="download-docx" class="btn secondary full-width">
+            Download Word document (.docx)
+          </button>
+
+          <p class="disclaimer-small">
+            Use the Word document as a starting point. Edit and customize it for your business needs.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Comply-Desk. Not legal advice.</p>
+    </div>
+  </footer>
+
+  <script src="generate.js"></script>
+</body>
+</html>
