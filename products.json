@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "full-library",
+    "name": "Full Comply-Desk Compliance Library (All 7 Kits)",
+    "price": 449,
+    "badge": "Full Library",
+    "description": "Access all seven Comply-Desk compliance kits at a discounted rate.",
+    "checkoutUrl": "https://buy.stripe.com/dRm28scab8wPdXHgGQ4c80g"
+  },
+  {
+    "slug": "web-data-compliance-bundle",
+    "name": "Web & Data Compliance Bundle",
+    "price": 329,
+    "badge": "Bundle",
+    "description": "ADA Website Compliance Kit + Privacy, Data & Consent Policy Kit for online and data-heavy small businesses.",
+    "checkoutUrl": "https://buy.stripe.com/dRm00k8XZ8wPdXH62c4c80f"
+  },
+  {
+    "slug": "people-contractor-compliance-bundle",
+    "name": "People & Contractor Compliance Bundle",
+    "price": 299,
+    "badge": "Bundle",
+    "description": "Employee Handbook & Policy Kit + Contractor / 1099 Compliance & Onboarding Kit to cover your team and contractors.",
+    "checkoutUrl": "https://buy.stripe.com/00w28s2zB4gzaLveyI4c80e"
+  },
+  {
+    "slug": "safety-essentials-bundle",
+    "name": "Safety Essentials Bundle (OSHA + Safety SOPs)",
+    "price": 279,
+    "badge": "Bundle",
+    "description": "OSHA Compliance Essentials Kit + Workplace Safety SOPs Kit for a practical safety starter pack.",
+    "checkoutUrl": "https://buy.stripe.com/eVqeVe2zBeVd5rbduE4c80d"
+  },
+  {
+    "slug": "ada-website-compliance-kit",
+    "name": "ADA Website Compliance Kit",
+    "price": 199,
+    "badge": "Web Compliance",
+    "description": "Accessibility statement, WCAG-aligned checklist, remediation recommendations, and accommodation request response templates.",
+    "checkoutUrl": "https://buy.stripe.com/4gM3cwa239AT8DngGQ4c80c"
+  },
+  {
+    "slug": "emergency-preparedness-response-kit",
+    "name": "Emergency Preparedness & Response Kit",
+    "price": 149,
+    "badge": "Safety",
+    "description": "Fire, medical, natural disaster and workplace emergency response plans, communication procedures, and supply checklists.",
+    "checkoutUrl": "https://buy.stripe.com/4gM28sb67eVdaLvcqA4c80b"
+  },
+  {
+    "slug": "workplace-safety-sops-kit",
+    "name": "Workplace Safety SOPs Kit",
+    "price": 179,
+    "badge": "Safety SOPs",
+    "description": "Standard operating procedures for daily safety, equipment use, hazard reporting, cleaning protocols and inspection forms.",
+    "checkoutUrl": "https://buy.stripe.com/7sY5kE8XZ9ATdXHcqA4c80a"
+  },
+  {
+    "slug": "employee-handbook-policy-kit",
+    "name": "Employee Handbook & Policy Kit",
+    "price": 249,
+    "badge": "HR",
+    "description": "AI-generated employee handbook, code of conduct, leave and PTO policies, remote work policies, and acknowledgement templates.",
+    "checkoutUrl": "https://buy.stripe.com/9B6dRa1vxbJ1cTD1LW4c809"
+  },
+  {
+    "slug": "contractor-1099-compliance-onboarding-kit",
+    "name": "Contractor / 1099 Compliance & Onboarding Kit",
+    "price": 149,
+    "badge": "Contractors",
+    "description": "Independent contractor agreement, onboarding checklist, misclassification risk checklist, and practical 1099 compliance guidelines.",
+    "checkoutUrl": "https://buy.stripe.com/9B64gAeij14ncTD8ak4c808"
+  },
+  {
+    "slug": "privacy-data-consent-policy-kit",
+    "name": "Privacy, Data & Consent Policy Kit",
+    "price": 199,
+    "badge": "Privacy",
+    "description": "Privacy policy, cookie policy, data retention standards, incident/breach response checklist, and third-party data processing language.",
+    "checkoutUrl": "https://buy.stripe.com/fZu9AU4HJ6oHcTD0HS4c807"
+  },
+  {
+    "slug": "osha-compliance-essentials-kit",
+    "name": "OSHA Compliance Essentials Kit",
+    "price": 179,
+    "badge": "Safety",
+    "description": "OSHA-aligned core safety manual, hazard communication and PPE guidance, incident report templates and safety acknowledgement language.",
+    "checkoutUrl": "https://buy.stripe.com/bJe4gAeij14n6vffCM4c806"
+  }
+]
