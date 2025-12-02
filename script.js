@@ -1,76 +1,11 @@
 // script.js
-// Homepage logic for Comply-Desk
-// - Renders kits from products.json into the kits grid
-// - Converts "Generate" buttons into free outline previews
-// - Leaves Stripe "Purchase" links untouched
+// Homepage helper for Comply-Desk
+// - Converts "Preview outline" links pointing to generate.html into free outline previews
+// - Does NOT modify layout or render cards (all kits are static HTML)
 
 document.addEventListener("DOMContentLoaded", () => {
-  initKitsSection();
-});
-
-async function initKitsSection() {
-  await renderKitsFromProducts();
   attachGeneratePreviewHandlers();
-}
-
-/**
- * Render all kits from products.json into the #kits-grid container.
- * If your index.html already has static cards, make sure the main
- * kits container has id="kits-grid" or adjust the selector below.
- */
-async function renderKitsFromProducts() {
-  const container = document.getElementById("kits-grid");
-  if (!container) {
-    // If there is no dynamic container, do nothing – your HTML may already
-    // contain hard-coded cards.
-    return;
-  }
-
-  try {
-    const res = await fetch("/products.json", { cache: "no-cache" });
-    if (!res.ok) throw new Error("Failed to load products.json");
-    const products = await res.json();
-
-    container.innerHTML = "";
-
-    products.forEach((product) => {
-      const card = document.createElement("article");
-      card.className = "kit-card";
-
-      const badge = product.badge || "";
-      const price = product.priceDisplay || (product.price ? `$${product.price}` : "");
-      const description = product.shortDescription || product.description || "";
-      const stripeUrl = product.stripeUrl || product.purchaseUrl || "#";
-      const slug = product.slug;
-
-      card.innerHTML = `
-        <div class="kit-card-inner">
-          ${badge ? `<div class="kit-badge">${badge}</div>` : ""}
-          <h3 class="kit-title">${product.name || "Compliance Kit"}</h3>
-          ${price ? `<p class="kit-price">${price}</p>` : ""}
-          ${description ? `<p class="kit-description">${description}</p>` : ""}
-          <div class="kit-actions">
-            <a class="btn btn-primary" href="${stripeUrl}" target="_blank" rel="noopener noreferrer">
-              Purchase
-            </a>
-            ${
-              slug
-                ? `<a class="btn btn-secondary kit-generate-link" href="/generate.html?product=${encodeURIComponent(
-                    slug
-                  )}">Preview outline</a>`
-                : ""
-            }
-          </div>
-        </div>
-      `;
-
-      container.appendChild(card);
-    });
-  } catch (err) {
-    console.error("Error rendering kits from products.json", err);
-    // Fallback: leave any existing static content alone
-  }
-}
+});
 
 /**
  * Attach click handlers to all links that point to generate.html
