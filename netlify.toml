@@ -1,26 +1,8 @@
-# Netlify configuration for Comply-Desk
-
 [build]
+  # No build step – just serve the files in the repo
+  command = "echo 'No build step'"
   publish = "."
-  command = ""
 
-# ---------------------------------------------------------
-# 1) Inject Google Ads Tag (AW-17686557179) on all pages
-# ---------------------------------------------------------
-[[headers]]
-  for = "/*"
-  [headers.values]
-    # Allow loading Google Tag scripts
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://*.googleusercontent.com data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-src 'self' https://www.googletagmanager.com;"
-    X-Content-Type-Options = "nosniff"
-
-# ---------------------------------------------------------
-# 2) Add Google Tag snippet through HTML injection
-# ---------------------------------------------------------
-[[plugins]]
-  package = "@netlify/plugin-inline-functions-env"
-
-# This section tells Netlify to append the tag to <head> of every HTML file
-[[edge_functions]]
-  function = "inject-tag"
-  path = "/*"
+[functions]
+  # This is where your serverless functions live
+  directory = "netlify/functions"
