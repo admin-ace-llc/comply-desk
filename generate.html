@@ -4,19 +4,31 @@
   <meta charset="UTF-8" />
   <title>Generate your Comply-Desk kit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17686557179"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17686557179');
+  </script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body class="generate-body">
   <main class="generate-main">
     <div class="container generate-container">
+
       <div class="generate-card">
         <h1 id="kitTitle">Generate your compliance kit</h1>
         <p id="kitSubtitle" class="generate-subtitle">
-          Thank you for your purchase. Please answer a few questions so we can prepare your Word
-          document.
+          Thank you for your purchase. Please answer a few questions so we can prepare your Word document.
         </p>
 
         <form id="kitForm" class="generate-form">
+
           <div class="form-row">
             <label for="businessName">Business name*</label>
             <input id="businessName" name="businessName" type="text" required />
@@ -33,13 +45,13 @@
           </div>
 
           <div class="form-row">
-            <label for="employees">Approximate number of workers (employees + contractors)</label>
+            <label for="employees">Approximate number of workers</label>
             <input id="employees" name="employees" type="number" min="1" />
           </div>
 
           <div class="form-row">
             <label for="risks">
-              Any special risks, equipment, or concerns we should keep in mind? (optional)
+              Any special risks, equipment, or concerns? (optional)
             </label>
             <textarea id="risks" name="risks" rows="3"></textarea>
           </div>
@@ -49,16 +61,16 @@
           </button>
 
           <p class="generate-hint">
-            Once you click generate, we’ll create a downloadable Word document (.docx) with your
-            kit contents. This may take a few seconds.
+            This may take a few seconds. Once complete, your .docx will download automatically.
           </p>
+
           <p class="generate-support">
-            If you run into issues, email
-            <a href="mailto:enquiries@comply-desk.com">enquiries@comply-desk.com</a> with your
-            order details.
+            Need help? Email <a href="mailto:enquiries@comply-desk.com">enquiries@comply-desk.com</a>.
           </p>
+
         </form>
       </div>
+
     </div>
   </main>
 
