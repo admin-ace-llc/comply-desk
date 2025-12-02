@@ -1,12 +1,76 @@
 // script.js
-// Simple UX helpers for Comply-Desk homepage
+// Homepage logic for Comply-Desk
+// - Renders kits from products.json into the kits grid
 // - Converts "Generate" buttons into free outline previews
-// - Prevents users from hitting generate.html before purchase
 // - Leaves Stripe "Purchase" links untouched
 
 document.addEventListener("DOMContentLoaded", () => {
-  attachGeneratePreviewHandlers();
+  initKitsSection();
 });
+
+async function initKitsSection() {
+  await renderKitsFromProducts();
+  attachGeneratePreviewHandlers();
+}
+
+/**
+ * Render all kits from products.json into the #kits-grid container.
+ * If your index.html already has static cards, make sure the main
+ * kits container has id="kits-grid" or adjust the selector below.
+ */
+async function renderKitsFromProducts() {
+  const container = document.getElementById("kits-grid");
+  if (!container) {
+    // If there is no dynamic container, do nothing – your HTML may already
+    // contain hard-coded cards.
+    return;
+  }
+
+  try {
+    const res = await fetch("/products.json", { cache: "no-cache" });
+    if (!res.ok) throw new Error("Failed to load products.json");
+    const products = await res.json();
+
+    container.innerHTML = "";
+
+    products.forEach((product) => {
+      const card = document.createElement("article");
+      card.className = "kit-card";
+
+      const badge = product.badge || "";
+      const price = product.priceDisplay || (product.price ? `$${product.price}` : "");
+      const description = product.shortDescription || product.description || "";
+      const stripeUrl = product.stripeUrl || product.purchaseUrl || "#";
+      const slug = product.slug;
+
+      card.innerHTML = `
+        <div class="kit-card-inner">
+          ${badge ? `<div class="kit-badge">${badge}</div>` : ""}
+          <h3 class="kit-title">${product.name || "Compliance Kit"}</h3>
+          ${price ? `<p class="kit-price">${price}</p>` : ""}
+          ${description ? `<p class="kit-description">${description}</p>` : ""}
+          <div class="kit-actions">
+            <a class="btn btn-primary" href="${stripeUrl}" target="_blank" rel="noopener noreferrer">
+              Purchase
+            </a>
+            ${
+              slug
+                ? `<a class="btn btn-secondary kit-generate-link" href="/generate.html?product=${encodeURIComponent(
+                    slug
+                  )}">Preview outline</a>`
+                : ""
+            }
+          </div>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error("Error rendering kits from products.json", err);
+    // Fallback: leave any existing static content alone
+  }
+}
 
 /**
  * Attach click handlers to all links that point to generate.html
@@ -22,11 +86,11 @@ function attachGeneratePreviewHandlers() {
       event.preventDefault();
 
       try {
-        const url = new URL(link.href);
+        const url = new URL(link.href, window.location.origin);
         const productSlug = url.searchParams.get("product");
         showKitPreview(productSlug);
       } catch (e) {
-        // If something goes wrong, just show a generic message
+        console.error("Error parsing generate link", e);
         showGenericPreview();
       }
     });
@@ -34,7 +98,7 @@ function attachGeneratePreviewHandlers() {
 }
 
 /**
- * Show a kit-specific preview based on the product slug
+ * Show a kit-specific preview based on the product slug.
  * This is a lightweight "try before you buy" outline.
  */
 function showKitPreview(slug) {
@@ -48,7 +112,7 @@ function showKitPreview(slug) {
         "ADA website statement & checklist",
         "Privacy, data & consent policies",
         "Emergency response & continuity plans",
-        "Templates in ready-to-edit Word format"
+        "All templates in ready-to-edit Word format"
       ]
     },
     "web-data-bundle": {
@@ -56,7 +120,7 @@ function showKitPreview(slug) {
       bullets: [
         "ADA website accessibility statement",
         "WCAG-style website checklist",
-        "Privacy policy tailored to small businesses",
+        "Privacy policy for online businesses",
         "Cookie / tracking disclosure language",
         "Internal data-handling & retention notes"
       ]
@@ -64,91 +128,91 @@ function showKitPreview(slug) {
     "people-contractor-bundle": {
       name: "People & Contractor Compliance Bundle",
       bullets: [
-        "Employee handbook structure & key clauses",
-        "Code of conduct & anti-harassment language",
+        "Employee handbook core structure",
+        "Code of conduct & anti-harassment",
         "Contractor onboarding checklist",
         "1099 agreement outline & expectations",
-        "Attendance, leave & remote work sections"
+        "Leave, attendance & remote work sections"
       ]
     },
     "safety-essentials-bundle": {
       name: "Safety Essentials Bundle (OSHA + Safety SOPs)",
       bullets: [
-        "Company safety policy & responsibilities",
-        "Incident reporting & investigation outline",
+        "Company safety policy outline",
+        "Incident reporting & investigation",
         "Hazard communication & PPE sections",
-        "Daily / weekly inspection checklist outline",
-        "Worker acknowledgement & training logs"
+        "Inspection checklist structure",
+        "Training & acknowledgement logs"
       ]
     },
     "ada-website-kit": {
       name: "ADA Website Compliance Kit",
       bullets: [
-        "ADA / accessibility commitment statement",
-        "Website accessibility checklist outline",
-        "Remediation & escalation process",
-        "Accommodation request response template",
-        "Contact & feedback language"
+        "Accessibility commitment statement",
+        "Website accessibility checklist",
+        "Remediation & escalation steps",
+        "Accommodation request template",
+        "Feedback & contact language"
       ]
     },
     "emergency-preparedness-kit": {
       name: "Emergency Preparedness & Response Kit",
       bullets: [
         "Emergency roles & responsibilities",
-        "Fire, medical & natural disaster response",
-        "Evacuation & shelter-in-place procedures",
-        "Communication plans & contact trees",
+        "Fire, medical & disaster response",
+        "Evacuation & shelter-in-place plans",
+        "Communication trees & contacts",
         "Post-incident review checklist"
       ]
     },
     "workplace-safety-sops": {
       name: "Workplace Safety SOPs Kit",
       bullets: [
-        "Safe work procedures for key tasks",
-        "Equipment & PPE use guidelines",
-        "Reporting and near-miss documentation",
-        "Inspection & maintenance checklists",
-        "Training and refresher tracking outline"
+        "Safe work procedures outline",
+        "PPE & equipment use guidance",
+        "Incident / near-miss templates",
+        "Inspection & maintenance logs",
+        "Training / refresher tracking"
       ]
     },
     "employee-handbook-kit": {
       name: "Employee Handbook & Policy Kit",
       bullets: [
-        "Welcome & culture statement outline",
+        "Welcome & culture statement",
         "Employment, hours & pay sections",
-        "Benefits, leave & time-off policies",
+        "Benefits, leave & PTO policies",
         "Code of conduct & discipline",
-        "Anti-harassment & equal opportunity"
+        "Anti-harassment & EEO clauses"
       ]
     },
     "contractor-onboarding-kit": {
       name: "Contractor / 1099 Compliance & Onboarding Kit",
       bullets: [
-        "Contractor role & scope outline",
+        "Scope of work & expectations",
         "Payment terms & invoicing notes",
         "Independence & compliance clauses",
-        "Onboarding checklist & documentation",
-        "Safety / confidentiality expectations"
+        "Onboarding checklist & docs",
+        "Safety / confidentiality notes"
       ]
     },
     "privacy-data-consent-kit": {
       name: "Privacy, Data & Consent Policy Kit",
       bullets: [
-        "Personal data categories & purposes",
-        "Legal bases / consent language",
-        "Data retention & deletion summary",
-        "Cookie / tracking disclosure outline",
-        "Individual rights & contact routes"
+        "Data categories & purposes",
+        "Consent / legal basis language",
+        "Retention & deletion summary",
+        "Cookie / tracking disclosure",
+        "Individual rights & contact info"
       ]
     },
     "osha-essentials-kit": {
       name: "OSHA Compliance Essentials Kit",
       bullets: [
-        "OSHA-focused safety policy overview",
+        "OSHA-focused safety statement",
         "Roles & responsibilities structure",
-        "Hazard & incident reporting sections",
-        "Training, PPE & documentation notes",
-        "Inspection & corrective action outline"
+        "Hazard & incident reporting",
+        "Training, PPE & documentation",
+        "Inspection & corrective action"
       ]
     }
   };
@@ -166,7 +230,8 @@ function showKitPreview(slug) {
     "This kit typically includes:",
     ...preview.bullets.map((b) => `• ${b}`),
     "",
-    "To get the full, ready-to-edit Word document, use the Purchase button for this kit. After payment you'll be taken to a short form to customize and download your pack."
+    "Use the Purchase button on the kit card to complete payment via Stripe.",
+    "After payment, you'll be taken to a short form to customize and download your Word document."
   ].join("\n");
 
   alert(message);
